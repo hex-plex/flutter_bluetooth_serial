@@ -8,7 +8,6 @@ homepage: https://github.com/edufolly/flutter_bluetooth_serial/tree/master/examp
 dependencies:
   flutter:
     sdk: flutter
-
   scoped_model: ^1.0.1
 
   cupertino_icons: ^0.1.2
