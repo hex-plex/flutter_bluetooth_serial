@@ -75,7 +75,6 @@ class _MainPage extends State<MainPage> {
 
  _MainPage(){
      future() async {
-                  // async lambda seems to not working
                   if (!_bluetoothState.isEnabled){
                     await FlutterBluetoothSerial.instance.requestEnable();
                 }}
@@ -97,6 +96,14 @@ class _MainPage extends State<MainPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('KyuKey Bluetooth Interface'),
+        backgroundColor: Colors.amber[900],
+        actions: <Widget>[IconButton(
+                  icon: Icon(Icons.settings),
+                  onPressed: (){
+                  FlutterBluetoothSerial.instance.openSettings();
+                },
+                )
+        ],
       ),
       body: Container(
         child: ListView(
@@ -105,6 +112,7 @@ class _MainPage extends State<MainPage> {
             SwitchListTile(
               title: const Text('Enable Bluetooth'),
               value: _bluetoothState.isEnabled,
+              activeColor: Colors.amberAccent[400],
               onChanged: (bool value) {
                 // Do the request and update with the true value then
                 future() async {
@@ -120,21 +128,11 @@ class _MainPage extends State<MainPage> {
                 });
               },
             ),
-            ListTile(
-              title: const Text('Bluetooth Settings'),
-              subtitle: Text(_bluetoothState.toString()),
-              trailing: RaisedButton.icon(
-                icon: Icon(Icons.settings ),
-                label: Text("Settings"),
-                onPressed: () {
-                  FlutterBluetoothSerial.instance.openSettings();
-                },
-              ),
-            ),
             Divider(),
             SwitchListTile(
               title: const Text('Auto-try specific pin when pairing'),
               subtitle: const Text('Pin 1234'),
+              activeColor: Colors.amberAccent[400],
               value: _autoAcceptPairingRequests,
               onChanged: (bool value) {
                 setState(() {
